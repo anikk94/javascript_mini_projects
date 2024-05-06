@@ -1,1 +1,1 @@
-# javascript_mini_projects
+# JavaScript Mini Projects
