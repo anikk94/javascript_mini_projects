@@ -1,0 +1,61 @@
+<style>
+  canvas {
+    /* border: solid 1px  black; */
+
+    background-color: silver;
+  }
+
+  /* body{
+    background-color: black;
+  } */
+
+</style>
+<a href="index.html">home</a>
+
+<br>
+<br>
+
+<div>
+  <p>canvas</p>
+  <canvas id="myCanvas" width="400" height="400"></canvas>
+</div>
+
+
+<script>
+  // MAIN
+  const ctx = myCanvas.getContext('2d');
+
+  const minRad=10;
+  const rangeRad=20;
+  let p=0;
+  let x=0;
+  let y=0;
+  
+  animate();
+  
+  function animate(){
+
+    p=p+0.04;
+    if (p>1){
+      p=0;
+    }
+
+    const rad=minRad+rangeRad*p;
+
+    ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+    ctx.beginPath();
+    ctx.arc(x, y, rad, 0, Math.PI*2);
+    ctx.stroke();
+    
+    requestAnimationFrame(animate);
+  }
+  
+  addEventListener('mousemove', function(info){
+    // const x=info.x;
+    // const y=info.y;
+    x=info.offsetX;
+    y=info.offsetY;
+  });
+
+
+</script>

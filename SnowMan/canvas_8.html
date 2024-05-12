@@ -1,0 +1,79 @@
+<style>
+  canvas {
+    /* border: solid 1px  black; */
+
+    background-color: black;
+  }
+
+  /* body{
+    background-color: black;
+  } */
+
+</style>
+<a href="index.html">home</a>
+
+<br>
+<br>
+
+<div>
+  <p>canvas</p>
+  <canvas id="myCanvas" width="400" height="400"></canvas>
+</div>
+
+
+<script>
+  // MAIN
+  const ctx = myCanvas.getContext('2d');
+
+
+  // pac man animation
+  const circle_image = new Image();
+  circle_image.src="yellow_circle.png";
+
+  let p = 0;
+  const minU=200;
+  const rangeU=250;
+  const minL=200;
+  const rangeL=250;
+  let sign = 1;
+
+  animate();
+
+  function animate(){
+
+    p = p+0.03*sign;
+
+    if (p>1 || p<0){
+      sign = -sign;
+    }
+
+
+    const U = minU - rangeU * p;
+    const L = minL + rangeL * p;
+
+
+    ctx.clearRect(0, 0, myCanvas.width, myCanvas.height)
+    ctx.drawImage(circle_image, 50, 50, 300, 300);
+    ctx.beginPath();
+    ctx.moveTo(200, 200);
+    ctx.lineTo(400, U);
+    ctx.lineTo(400, L);
+    ctx.lineTo(200, 200);
+    ctx.fillStyle="black";
+    ctx.fill();
+
+
+    ctx.font="30px Arial";
+    ctx.textBaseline="middle";
+    ctx.textAlign="center";
+    ctx.fillStyle="yellow";
+    ctx.fillText("PAC-MAN", 200, 20);
+    // ctx.strokeText(??)??;
+
+    // TODO
+    // food consumption animation
+    
+    requestAnimationFrame(animate);
+  }
+
+</script>

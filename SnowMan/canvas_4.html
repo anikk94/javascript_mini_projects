@@ -1,0 +1,165 @@
+<head>
+
+</head>
+
+  <style>
+    canvas {
+      border: dashed 1em  black;
+    }
+    /* body{
+      background-color: black;
+    } */
+  </style>
+<a href="index.html">home</a>
+
+<br>
+<br>
+<div>
+  <p>demo 4</p>
+  <canvas id="canvas1"
+          width="400" height="400"
+          style="background-color: red;"></canvas>
+  <br>
+  <br>
+  
+  <canvas id="canvas2"
+          width="400" height="400"
+          style="background-color: red;"></canvas>
+  
+  <br>
+  <br>
+  
+  <canvas id="canvas3"
+          width="400" height="400"
+          style="background-color: red;"></canvas>
+  <br>
+  <br>
+</div>
+
+<script>
+  // MAIN
+
+  pattern1();
+  pattern2();
+  pattern3();
+  
+
+  function pattern1(){
+
+    let canvElem = document.getElementById('canvas1');
+    const ctx = canvElem.getContext('2d');
+
+    ctx.beginPath();
+    ctx.rect(0, 0, 400, 400);
+    ctx.fillStyle="blue";
+    ctx.fill();
+  
+    ctx.beginPath();
+    ctx.rect(50, 50, 300, 300);
+    ctx.fillStyle="white";
+    ctx.fill();
+    
+    ctx.beginPath();
+    ctx.rect(100, 100, 200, 200);
+    ctx.fillStyle="blue";
+    ctx.fill();
+    
+    ctx.beginPath();
+    ctx.rect(150, 150, 100, 100);
+    ctx.fillStyle="white";
+    ctx.fill();
+  }
+
+  function pattern2(){
+
+    let canvElem = document.getElementById('canvas2');
+    const ctx = canvElem.getContext('2d');
+    let thickness = 40;
+    let x=0;
+    let y=0;
+    let w=400;
+    let h=400;
+
+    ctx.beginPath();
+    ctx.rect(x, y, w, h);
+    ctx.fillStyle="blue";
+    ctx.fill();
+    
+    x=x+thickness;
+    y=y+thickness;
+    w=w-thickness-thickness;
+    h=h-thickness-thickness;
+    
+    ctx.beginPath();
+    ctx.rect(x, y, w, h);
+    ctx.fillStyle="white";
+    ctx.fill();
+
+    x=x+thickness;
+    y=y+thickness;
+    w=w-thickness-thickness;
+    h=h-thickness-thickness;
+    
+    ctx.beginPath();
+    ctx.rect(x, y, w, h);
+    ctx.fillStyle="blue";
+    ctx.fill();
+    
+    x=x+thickness;
+    y=y+thickness;
+    w=w-thickness-thickness;
+    h=h-thickness-thickness;
+    
+    ctx.beginPath();
+    ctx.rect(x, y, w, h);
+    ctx.fillStyle="white";
+    ctx.fill();
+
+    x=x+thickness;
+    y=y+thickness;
+    w=w-thickness-thickness;
+    h=h-thickness-thickness;
+    
+    ctx.beginPath();
+    ctx.rect(x, y, w, h);
+    ctx.fillStyle="blue";
+    ctx.fill();
+  }
+
+  function pattern3(){
+
+    let canvElem = document.getElementById('canvas3');
+    const ctx = canvElem.getContext('2d');
+   
+    const thickness = 10;
+    let x=0;
+    let y=0;
+    let w=200;
+    let h=400;
+
+    for(let i = 0; w >= 2*thickness; i++)
+    {
+      if (i % 2 == 0)
+      {
+        ctx.fillStyle="blue";
+      }
+      else
+      {
+        ctx.fillStyle="white";
+      }
+      
+      ctx.beginPath();
+      ctx.rect(x, y, w, h);
+      ctx.fill();
+      
+      x=x+thickness;
+      y=y+thickness;
+      w=w-thickness-thickness;
+      h=h-thickness-thickness;
+    }
+  }
+  
+
+
+
+</script>

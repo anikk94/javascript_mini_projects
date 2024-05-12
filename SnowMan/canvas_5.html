@@ -1,0 +1,104 @@
+<style>
+  canvas {
+    /* border: solid 1px  black; */
+    background-color: #009BD7;
+  }
+
+  /* body{
+    background-color: black;
+  } */
+</style>
+<a href="index.html">home</a>
+
+<br>
+<br>
+
+<div>
+  <p>demo 5</p>
+  <p>refresh for different pattern</p>
+  <canvas id="myCanvas" width="400" height="400"></canvas>
+</div>
+
+
+<script>
+  // MAIN
+
+  const el = document.getElementById('myCanvas');
+  const ctx = el.getContext('2d');
+
+
+  spacing = 60;
+  width = 400;
+  height = 400;
+
+
+  drawGridOfSnowmen(spacing, width, height);
+
+
+  function drawGridOfSnowmen(spacing, width, height){
+    var x=spacing;
+    var y=spacing;
+    while (x < width) {
+      while (y < height) {
+        scaleFactor = Math.random();
+        // drawSnowman(x, y, 10, 0.8, 0.6);
+        drawSnowman(x, y, 12, scaleFactor, 0.6);
+        y = y + spacing;
+      }
+      x = x + spacing;
+      y=spacing;
+    }
+  }
+
+  // drawSnowman(200, 300, 50, 0.8, 1.05);
+
+  function drawSnowman(x1, y1, r1, scaleFactor, ballOverlapFactor){
+    // x1 = base ball x
+    // y1 = base ball y
+    // r1 = base ball radius
+    // scaleFactor = 0.8
+    // ballOverlapFactor = 1.05
+    ctx.beginPath();
+    ctx.arc(x1, y1, r1, 0, Math.PI * 2);
+    ctx.fillStyle = "white";
+    ctx.fill();
+  
+    const r2 = scaleFactor * r1, 
+          x2 = x1, 
+          y2 = y1 - r1 - ballOverlapFactor * r2;
+    ctx.beginPath();
+    ctx.arc(x2, y2, r2, 0, Math.PI * 2);
+    ctx.fill();
+  
+    const r3 = scaleFactor * r2, 
+          x3 = x2, 
+          y3 = y2 - r2 - ballOverlapFactor * r3;
+    ctx.beginPath();
+    ctx.arc(x3, y3, r3, 0, Math.PI * 2);
+    ctx.fill();
+  
+    drawHat(x3, y3, r3);
+  }
+
+  function drawHat(headX, headY, headRad){
+    const w4 = headRad * 2, 
+          h4 = 0.5 * headRad, 
+          x4 = headX - w4 / 2, 
+          y4 = headY - headRad;
+    ctx.beginPath();
+    ctx.rect(x4, y4, w4, h4);
+    ctx.fillStyle = "black";
+    ctx.fill()
+  
+    const w5 = 0.8*w4,
+          h5=w5;
+          // x5=x4+0.5*(w4-w5);
+          x5=headX-0.5*w5;
+          y5=y4-h5;
+    ctx.beginPath();
+    ctx.rect(x5, y5 ,w5, h5);
+    ctx.fill();
+
+  }
+
+</script>
