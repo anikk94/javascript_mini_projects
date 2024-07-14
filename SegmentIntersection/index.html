@@ -100,19 +100,51 @@
             (Dx-Cx)(Ay-Cy)-(Dy-Cy)(Ax-Cx) = (Dy-Cy)(Bx-Ax)t-(Dx-Cx)(By-Ay)t 
             (Dx-Cx)(Ay-Cy)-(Dy-Cy)(Ax-Cx) = {(Dy-Cy)(Bx-Ax)-(Dx-Cx)(By-Ay)}t 
             (Dx-Cx)(Ay-Cy)-(Dy-Cy)(Ax-Cx) \ (Dy-Cy)(Bx-Ax)-(Dx-Cx)(By-Ay) = t 
+            
+            tTop   = (Dx-Cx)(Ay-Cy)-(Dy-Cy)(Ax-Cx)
+            bottom = (Dy-Cy)(Bx-Ax)-(Dx-Cx)(By-Ay)
+            t = tTop/bottom
 
             now solve for u (intersection along CD)
+            Ax+(Bx-Ax)t = Cx+(Dx-Cx)u |-Ax
+            (Bx-Ax)t = (Cx-Ax)+(Dx-Cx)u 
+            
+            Ay+(By-Ay)t = Cy+(Dy-Cy)u |-Ay
+            (By-Ay)t = (Cy-Ay)+(Dy-Cy)u |*(Bx-Ax)
+            (Bx-Ax)(By-Ay)t = (Bx-Ax){(Cy-Ay)+(Dy-Cy)u}
+            (Bx-Ax)(By-Ay)t = (Bx-Ax)(Cy-Ay)+(Bx-Ax)(Dy-Cy)u
+            
+            sub in the value of (Bx-Ax)t from previous step
+            {(Cx-Ax)+(Dx-Cx)u}(By-Ay) = (Bx-Ax)(Cy-Ay)+(Bx-Ax)(Dy-Cy)u
+            (By-Ay)(Cx-Ax)+(By-Ay)(Dx-Cx)u = (Bx-Ax)(Cy-Ay)+(Bx-Ax)(Dy-Cy)u
+            
+            (By-Ay)(Cx-Ax)-(Bx-Ax)(Cy-Ay) = (Bx-Ax)(Dy-Cy)u-(By-Ay)(Dx-Cx)u
+            (By-Ay)(Cx-Ax)-(Bx-Ax)(Cy-Ay) = {(Bx-Ax)(Dy-Cy)-(By-Ay)(Dx-Cx)}u
+            (By-Ay)(Cx-Ax)-(Bx-Ax)(Cy-Ay)/(Bx-Ax)(Dy-Cy)-(By-Ay)(Dx-Cx) = u
+            
+            re-arranging to match bottom
+            (By-Ay)(Cx-Ax)-(Bx-Ax)(Cy-Ay)/(Dy-Cy)(Bx-Ax)-(Dx-Cx)(By-Ay) = u
+            
+            re-arranging to match radu (uTop)
+            -1(-By+Ay)(Cx-Ax)-(-1)(-Bx+Ax)(Cy-Ay)/(Dy-Cy)(Bx-Ax)-(Dx-Cx)(By-Ay) = u
+            (Ax-Bx)(Cy-Ay)-(Ay-By)(Cx-Ax)/(Dy-Cy)(Bx-Ax)-(Dx-Cx)(By-Ay) = u
+            (Cy-Ay)(Ax-Bx)-(Cx-Ax)(Ay-By)/(Dy-Cy)(Bx-Ax)-(Dx-Cx)(By-Ay) = u
+
+            uTop   = (By-Ay)(Cx-Ax)-(Bx-Ax)(Cy-Ay) = (Cy-Ay)(Ax-Bx)-(Cx-Ax)(Ay-By)
+            bottom = (Dy-Cy)(Bx-Ax)-(Dx-Cx)(By-Ay)
+            u = uTop/bottom
+
         */
             
-            const tTop    = (D.x-C.x)*(A.y-C.y)-(D.y-C.y)*(A.x-C.x);
-            // const uTop    = 
+            const tTop = (D.x-C.x)*(A.y-C.y)-(D.y-C.y)*(A.x-C.x);
+            const uTop = (B.y-A.y)*(C.x-A.x)-(B.x-A.x)*(C.y-A.y);
             const bottom = (D.y-C.y)*(B.x-A.x)-(D.x-C.x)*(B.y-A.y);
 
             if (bottom != 0){
                 const t = tTop/bottom;
-                // const u = uTop/bottom;
-                // if(t>=0 && t<=1 && u>=0 && u<=1){
-                if(t>=0 && t<=1){
+                const u = uTop/bottom;
+                if(t>=0 && t<=1 && u>=0 && u<=1){
+                // if(t>=0 && t<=1){
                     return {
                         x:lerp(A.x, B.x, t),
                         y:lerp(A.y, B.y, t),
