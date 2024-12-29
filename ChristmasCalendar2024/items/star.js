@@ -25,7 +25,7 @@ function drawStar(ctx, x, y, size, hue){
         const sy=y+Math.sin(angle)*outerRadius;
         ctx.lineTo(sx, sy);
         }
-        ctx.fillStyle=`hsl(${hue},100%,50%)`
+        ctx.fillStyle=colour.normal(hue)
         ctx.fill();
     }
 }
