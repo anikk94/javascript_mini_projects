@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Christmas Ornament</title>
+<style>
+body { margin: 0; overflow: hidden; } /* Prevents scrollbars */
+canvas { display: block; } /* Prevents a small gap below the canvas */
+</style>
+</head>
+<body>
+<canvas id="ornamentCanvas"></canvas>
+<script>
+const canvas = document.getElementById('ornamentCanvas');
+const ctx = canvas.getContext('2d');
+
+// Set canvas dimensions to fill the window
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+function drawOrnament(x, y, radius, color, highlightColor, reflectionColor) {
+
+  // Main ornament shape
+  ctx.beginPath();
+  ctx.arc(x, y, radius, 0, 2 * Math.PI);
+  ctx.fillStyle = color;
+  ctx.fill();
+
+  // Highlight (gradient)
+  const highlightGradient = ctx.createRadialGradient(
+      x - radius / 3, y - radius / 3, 0,
+      x - radius / 6, y - radius / 6, radius / 2
+  );
+  highlightGradient.addColorStop(0, highlightColor);
+  highlightGradient.addColorStop(1, 'transparent');
+  ctx.fillStyle = highlightGradient;
+  ctx.fill();
+
+    // Reflection (gradient)
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, Math.PI); // Half circle for reflection
+    ctx.fillStyle = color;
+    ctx.globalCompositeOperation = "source-atop"; // Important for correct blending
+    const reflectionGradient = ctx.createLinearGradient(x, y-radius, x, y);
+    reflectionGradient.addColorStop(0, reflectionColor);
+    reflectionGradient.addColorStop(1, 'transparent');
+    ctx.fillStyle = reflectionGradient;
+    ctx.fill();
+    ctx.globalCompositeOperation = "source-over"; // Reset compositing
+
+  // Top part (metal cap)
+  ctx.beginPath();
+  ctx.moveTo(x - radius * 0.6, y - radius);
+  ctx.lineTo(x + radius * 0.6, y - radius);
+  ctx.lineTo(x + radius * 0.4, y - radius * 1.2);
+  ctx.lineTo(x - radius * 0.4, y - radius * 1.2);
+  ctx.closePath();
+  ctx.fillStyle = '#C0C0C0'; // Light gray for metal
+  ctx.fill();
+
+  // Hook (simple line)
+  ctx.beginPath();
+  ctx.moveTo(x, y - radius * 1.2);
+  ctx.lineTo(x, y - radius * 1.4);
+  ctx.strokeStyle = '#808080'; // Darker gray
+  ctx.lineWidth = 3;
+  ctx.stroke();
+
+  // Add a small loop at the top of the hook
+  ctx.beginPath();
+  ctx.arc(x, y - radius * 1.4, 3, 0, Math.PI);
+  ctx.strokeStyle = '#808080';
+  ctx.stroke();
+}
+
+// Example usage (draw multiple ornaments)
+drawOrnament(canvas.width / 4, canvas.height / 2, 80, 'red', 'white', 'rgba(255,255,255,0.3)');
+drawOrnament(canvas.width / 2, canvas.height / 2, 60, 'blue', 'white', 'rgba(255,255,255,0.3)');
+drawOrnament(canvas.width * 3 / 4, canvas.height / 2, 100, 'gold', '#FFFFE0', 'rgba(255,255,0,0.2)');
+
+
+// Resize the canvas when the window is resized
+window.addEventListener('resize', function() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  // Redraw the ornaments (you might want to store their positions)
+  drawOrnament(canvas.width / 4, canvas.height / 2, 80, 'red', 'white', 'rgba(255,255,255,0.3)');
+  drawOrnament(canvas.width / 2, canvas.height / 2, 60, 'blue', 'white', 'rgba(255,255,255,0.3)');
+  drawOrnament(canvas.width * 3 / 4, canvas.height / 2, 100, 'gold', '#FFFFE0', 'rgba(255,255,0,0.2)');
+});
+
+
+</script>
+</body>
+</html>
