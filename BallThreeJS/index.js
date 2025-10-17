@@ -62,8 +62,8 @@ scene.add(hemiLight);
 function animate(t=0){
     requestAnimationFrame(animate);
     // animation
-    // mesh.scale.setScalar(Math.cos(t*0.002)+1.0);
-    // wireMesh.scale.setScalar(Math.cos(t*0.002)+1.0);
+    mesh.scale.setScalar(0.1*Math.cos(t*0.003)+1.0);
+    wireMesh.scale.setScalar(0.1*Math.cos(t*0.003)+1.0);
     
     // animation
     mesh.rotation.y=t*0.0002;
