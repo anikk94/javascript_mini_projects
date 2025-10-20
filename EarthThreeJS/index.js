@@ -24,7 +24,7 @@ controls.dampingFactor = 0.3;
 
 // --- OBJECTS ---
 const earthGroup = new THREE.Group();
-earthGroup.rotation.z = -23.4*Math.PI/180;
+earthGroup.rotation.z = (-23.4)*Math.PI/180;
 scene.add(earthGroup);
 
 // cube object
